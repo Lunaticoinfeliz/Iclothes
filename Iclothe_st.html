@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Iclothe.st - Plataforma Integral para la Industria Textil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        
+        .search-dropdown {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .factory-card:hover .factory-image {
+            transform: scale(1.05);
+        }
+        
+        .order-steps li:not(:last-child):after {
+            content: "";
+            position: absolute;
+            right: -1.5rem;
+            top: 1.5rem;
+            width: 1rem;
+            height: 1px;
+            background-color: #d1d5db;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 640px) {
+            .hero-gradient h1 {
+                font-size: 2.25rem;
+                line-height: 2.5rem;
+            }
+            .hero-gradient p {
+                font-size: 1.125rem;
+            }
+            .service-card {
+                margin-bottom: 1rem;
+            }
+            .factory-card, .service-card {
+                margin-bottom: 1.5rem;
+            }
+            #main-search {
+                padding: 0.75rem;
+            }
+            .search-dropdown {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/659c13d4-9c6c-4b01-aaab-2a8b05d86850.png" alt="Logo de TextileHub - Una aguja de coser estilizada formando un círculo con un hilo" class="h-8 w-8 rounded-full">
+                        <span class="ml-2 text-xl font-semibold text-gray-900" style="outline: rgb(0, 0, 0) dotted 3px; outline-offset: 1px;">Iclothe.st</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#factories" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Fábricas</a>
+                        <a href="#coworking" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Coworking</a>
+                        <a href="#production" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Producción China</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Iniciar Sesión</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Abrir menú principal</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Mobile menu -->
+                <div id="mobile-menu" class="hidden sm:hidden absolute top-16 left-0 right-0 bg-white shadow-md z-50">
+                    <div class="px-2 pt-2 pb-3 space-y-1">
+                        <a href="#factories" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Fábricas</a>
+                        <a href="#coworking" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Coworking</a>
+                        <a href="#production" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Producción China</a>
+                        <button class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-indigo-600 bg-indigo-50">Iniciar Sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">Tu plataforma integral para la industria textil</h1>
+                <p class="mt-4 sm:mt-6 max-w-lg mx-auto text-lg sm:text-xl">Arrienda fábricas, espacios coworking y gestiona producción masiva en China desde un solo lugar</p>
+                <div class="mt-10">
+                    <div class="mt-1 relative rounded-md shadow-sm max-w-md mx-auto">
+                        <input type="text" id="main-search" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-4 pr-12 py-4 border-gray-300 rounded-md text-gray-900" placeholder="Buscar fábricas, coworking...">
+                        <div class="absolute inset-y-0 right-0 flex items-center">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-r-md h-full">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Nuestros Servicios</h2>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Todo lo que necesitas para tu negocio textil en un solo lugar</p>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Factory Rental -->
+            <div id="factories" class="service-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2261a9d8-0481-4ba6-9aeb-040b8c85f0ea.png" alt="Interior de una fábrica textil moderna con máquinas industriales y trabajadores operándolas" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Arriendo de Fábricas</h3>
+                    <p class="mt-2 text-gray-600">Encuentra y arrienda fábricas textiles disponibles por tiempo limitado, como un Airbnb industrial.</p>
+                    <div class="mt-4">
+                        <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md text-sm font-medium">Explorar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coworking Spaces -->
+            <div id="coworking" class="service-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7071c882-dde2-4698-b9ac-24f76b4ba729.png" alt="Espacio de coworking moderno con escritorios compartidos, plantas y diseñadores textiles trabajando" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Espacios Coworking</h3>
+                    <p class="mt-2 text-gray-600">Arrienda espacios flexibles para diseñadores y emprendedores textiles.</p>
+                    <div class="mt-4">
+                        <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md text-sm font-medium">Explorar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- China Production -->
+            <div id="production" class="service-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b22c22c3-4469-4939-9b9b-9461e485cbce.png" alt="Fábrica textil en China con trabajadores asiáticos operando máquinas de coser industriales" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Producción en China</h3>
+                    <p class="mt-2 text-gray-600">Gestiona pedidos de producción masiva con fábricas confiables en China.</p>
+                    <div class="mt-4">
+                        <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md text-sm font-medium">Explorar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Factory Rental Section -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Arriendo de Fábricas Textiles</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Encuentra la fábrica perfecta para tu producción temporal</p>
+            </div>
+            
+            <!-- Search Filters -->
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700">Ubicación</label>
+                        <select id="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option>Todas</option>
+                            <option>Providencia</option>
+                            <option>Las Condes</option>
+                            <option>Ñuñoa</option>
+                            <option>Vitacura</option>
+                            <option>La Reina</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="capacity" class="block text-sm font-medium text-gray-700">Capacidad</label>
+                        <select id="capacity" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option>Cualquiera</option>
+                            <option>Pequeña (1-10 trabajadores)</option>
+                            <option>Mediana (11-50 trabajadores)</option>
+                            <option>Grande (50+ trabajadores)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dates" class="block text-sm font-medium text-gray-700">Fechas</label>
+                        <input type="text" id="dates" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" placeholder="Selecciona fechas">
+                    </div>
+                    <div class="flex items-end">
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium w-full">Buscar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Factory Listings -->
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Factory 1 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fbb4e6d-eda0-4658-8693-cdc2c4111ee9.png" alt="Fábrica textil moderna en Medellín con máquinas de última generación y espacio amplio" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Fábrica Textil Moderna</h3>
+                                <p class="text-sm text-gray-500">Medellín, Antioquia</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.8</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Capacidad para 25 trabajadores. Equipada con 50 máquinas de coser industriales.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$1,200,000</span>
+                                <span class="text-sm text-gray-500">/ semana</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Factory 2 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f75f7018-ded0-4612-a5b8-dfb3e1727029.png" alt="Fábrica textil tradicional en Bogotá con máquinas antiguas pero bien mantenidas" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Taller Artesanal</h3>
+                                <p class="text-sm text-gray-500">Las Condes, Santiago</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.5</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Pequeño taller ideal para producciones limitadas. Capacidad para 8 trabajadores.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$650,000</span>
+                                <span class="text-sm text-gray-500">/ semana</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Factory 3 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/75476684-2ede-403f-a1bc-12940206b0b7.png" alt="Complejo industrial textil en Cali con múltiples naves y estacionamiento amplio" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Complejo Industrial</h3>
+                                <p class="text-sm text-gray-500">Ñuñoa, Santiago</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.9</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Gran capacidad para más de 100 trabajadores. Incluye área de lavandería y acabados.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$3,500,000</span>
+                                <span class="text-sm text-gray-500">/ semana</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button class="bg-white hover:bg-gray-50 text-indigo-600 border border-indigo-600 px-6 py-3 rounded-md text-sm font-medium">Ver más fábricas disponibles</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coworking Section -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Espacios Coworking</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Encuentra el espacio perfecto para tu equipo creativo</p>
+            </div>
+            
+            <!-- Coworking Tabs -->
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="tab-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Todos</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Privados</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Compartidos</button>
+                    <button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Estudios</button>
+                </nav>
+            </div>
+            
+            <!-- Coworking Listings -->
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                <!-- Coworking 1 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0a92640b-df2a-4e52-95aa-3ca5c877a40f.png" alt="Espacio de coworking moderno en Medellín con escritorios compartidos, plantas y buena iluminación" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">The Textile Lab</h3>
+                                <p class="text-sm text-gray-500">Medellín, Antioquia</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.7</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Espacio compartido con mesas de diseño, impresoras 3D y área de prototipado textil.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$250,000</span>
+                                <span class="text-sm text-gray-500">/ mes</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coworking 2 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/70adbe00-80df-4d6e-8e4f-fa3cfecd0c8a.png" alt="Oficina privada en Bogotá con vista a la ciudad, escritorios modernos y pizarra para diseño" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Design Studio</h3>
+                                <p class="text-sm text-gray-500">Bogotá, Cundinamarca</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.9</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Oficina privada para equipos de hasta 6 personas. Incluye acceso a sala de reuniones.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$1,800,000</span>
+                                <span class="text-sm text-gray-500">/ mes</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coworking 3 -->
+                <div class="factory-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18de199f-fdc4-4885-93e7-3d716fb4dc78.png" alt="Estudio de diseño textil en Cali con maniquíes, mesas de corte y muestrarios de telas" class="factory-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Textile Atelier</h3>
+                                <p class="text-sm text-gray-500">Cali, Valle del Cauca</p>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="ml-1 text-gray-600">4.6</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">Estudio completo con equipos para diseño textil, incluye máquinas de coser básicas.</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-semibold text-gray-900">$2,200,000</span>
+                                <span class="text-sm text-gray-500">/ mes</span>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button class="bg-white hover:bg-gray-50 text-indigo-600 border border-indigo-600 px-6 py-3 rounded-md text-sm font-medium">Ver más espacios disponibles</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- China Production Section -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Producción Masiva en China</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Simplificamos tu producción textil en el mercado asiático</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8 lg:p-12">
+                        <h3 class="text-2xl font-semibold text-gray-900">Cómo funciona</h3>
+                        <p class="mt-4 text-gray-600">Gestionamos todo el proceso de producción con fábricas confiables en China, desde el muestreo hasta la entrega.</p>
+                        
+                        <ul class="mt-8 space-y-8 order-steps">
+                            <li class="relative pl-8">
+                                <div class="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100">
+                                    <span class="text-indigo-600">1</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-gray-900">Envía tu diseño</h4>
+                                <p class="mt-2 text-gray-600">Sube tus especificaciones técnicas, muestras y cantidades requeridas.</p>
+                            </li>
+                            <li class="relative pl-8">
+                                <div class="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100">
+                                    <span class="text-indigo-600">2</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-gray-900">Cotización</h4>
+                                <p class="mt-2 text-gray-600">Recibirás cotizaciones de múltiples fábricas dentro de 72 horas.</p>
+                            </li>
+                            <li class="relative pl-8">
+                                <div class="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100">
+                                    <span class="text-indigo-600">3</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-gray-900">Producción</h4>
+                                <p class="mt-2 text-gray-600">Supervisamos todo el proceso de producción y control de calidad.</p>
+                            </li>
+                            <li class="relative pl-8">
+                                <div class="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100">
+                                    <span class="text-indigo-600">4</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-gray-900">Envío</h4>
+                                <p class="mt-2 text-gray-600">Gestionamos el envío internacional hasta tu ubicación.</p>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-8">
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md text-sm font-medium">Iniciar pedido</button>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e074dcad-8c34-491e-94f4-33c4008966e3.png" alt="Fábrica textil en China con trabajadores asiáticos inspeccionando prendas de vestir en una línea de producción" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Production Form -->
+            <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-gray-900">Solicitar cotización</h3>
+                <p class="mt-2 text-gray-600">Completa este formulario para recibir cotizaciones de producción en China.</p>
+                
+                <form class="mt-8 space-y-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            <label for="product-type" class="block text-sm font-medium text-gray-700">Tipo de producto</label>
+                            <select id="product-type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                <option>Selecciona</option>
+                                <option>Ropa deportiva</option>
+                                <option>Ropa casual</option>
+                                <option>Ropa formal</option>
+                                <option>Accesorios</option>
+                                <option>Telas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
+                            <input type="number" id="quantity" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" placeholder="Ej: 1000">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="specs" class="block text-sm font-medium text-gray-700">Especificaciones técnicas</label>
+                        <textarea id="specs" rows="4" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" placeholder="Describe los materiales, tallas, colores, etc."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Sube tus archivos</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>Sube un archivo</span>
+                                        <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                    </label>
+                                    <p class="pl-1">o arrastra y suelta</p>
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, PDF hasta 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">Acepto los términos y condiciones</label>
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md text-sm font-medium">Enviar solicitud</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Lo que dicen nuestros clientes</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Empresas textiles que han confiado en nosotros</p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/54876785-1e76-4c6c-91bf-8c9a0fe0dadf.png" alt="Retrato de María Gómez, diseñadora de moda de Medellín" class="h-12 w-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">María Gómez</h4>
+                            <p class="text-sm text-gray-500">Diseñadora de Moda</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">"Gracias a Iclothe.st pude encontrar una fábrica disponible para mi colección de temporada sin comprometerme a largo plazo. El proceso fue muy sencillo."</p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8973c761-c051-4aaf-a50c-448913ac5e01.png" alt="Retrato de Carlos Rodríguez, director de producción textil en Bogotá" class="h-12 w-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Carlos Rodríguez</h4>
+                            <p class="text-sm text-gray-500">Director de Producción</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">"El espacio coworking que arrendamos a través de TextileHub fue perfecto para nuestro equipo de diseño durante el desarrollo de una nueva colección."</p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73cf661e-fc65-4f3e-9df0-9adcbea41008.png" alt="Retrato de Luisa Fernández, fundadora de marca de ropa sostenible en Cali" class="h-12 w-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Luisa Fernández</h4>
+                            <p class="text-sm text-gray-500">Fundadora de Marca</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">"Iclothe.st nos ayudó a conectar con fábricas en China para nuestra producción masiva. El proceso fue transparente y sin complicaciones."</p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Preguntas frecuentes</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Todo lo que necesitas saber sobre nuestros servicios</p>
+            </div>
+            
+            <div class="mt-12">
+                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12">
+                    <!-- FAQ 1 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Cómo funciona el arriendo de fábricas?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Puedes buscar fábricas disponibles por ubicación, capacidad y fechas. Una vez encuentres la que necesitas, puedes reservarla directamente a través de nuestra plataforma.</dd>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Qué incluyen los espacios coworking?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Nuestros espacios coworking incluyen escritorios, acceso a internet, salas de reuniones y en algunos casos equipos básicos para diseño textil.</dd>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Cómo garantizan la calidad en la producción China?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Trabajamos solo con fábricas verificadas y realizamos controles de calidad en cada etapa del proceso de producción.</dd>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Cuánto tiempo toma recibir una cotización?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Para producción en China, recibirás cotizaciones dentro de 72 horas después de enviar tus especificaciones.</dd>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Puedo cancelar una reserva?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Sí, las cancelaciones están sujetas a nuestras políticas de cancelación que varían según el proveedor.</dd>
+                    </div>
+                    
+                    <!-- FAQ 6 -->
+                    <div>
+                        <dt class="text-lg leading-6 font-medium text-gray-900">¿Qué métodos de pago aceptan?</dt>
+                        <dd class="mt-2 text-base text-gray-500">Aceptamos tarjetas de crédito/débito, transferencias bancarias y PayPal para todos nuestros servicios.</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-indigo-700">
+        <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                <span class="block">¿Listo para transformar tu negocio textil?</span>
+                <span class="block">Regístrate hoy mismo.</span>
+            </h2>
+            <p class="mt-4 text-lg leading-6 text-indigo-200">Únete a cientos de empresas que ya están usando TextileHub para simplificar sus operaciones.</p>
+            <button class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">Comenzar ahora</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Servicios</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Arriendo de fábricas</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Espacios coworking</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Producción China</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Empresa</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Sobre nosotros</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Trabaja con nosotros</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Privacidad</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Términos</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Seguridad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Contacto</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">info@textilehub.com</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">+56 9 1234 5678</a></li>
+                        <li class="flex space-x-6 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-300">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-300">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-300">
+                                <span class="sr-only">LinkedIn</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-gray-300">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">© 2023 Iclothe.st. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Demo functionality for the prototype
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('[role="tab"]');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove all active classes
+                    tabs.forEach(t => t.classList.remove('tab-active'));
+                    // Add active class to clicked tab
+                    this.classList.add('tab-active');
+                });
+            });
+            
+            // Search dropdown demo
+            const searchInput = document.getElementById('main-search');
+            searchInput.addEventListener('focus', function() {
+                // In a real app, this would fetch search suggestions
+                console.log('Fetching search suggestions...');
+            });
+            
+            // Date picker demo
+            const dateInput = document.getElementById('dates');
+            dateInput.addEventListener('focus', function() {
+                // In a real app, this would show a date picker
+                console.log('Showing date picker...');
+            });
+            
+            // Form submission demo
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto.');
+                    form.reset();
+                });
+            });
+            
+            // Reservation buttons
+            const reserveButtons = document.querySelectorAll('button:contains("Reservar")');
+            reserveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('¡Reserva realizada con éxito! Te hemos enviado los detalles por correo electrónico.');
+                });
+            });
+            
+            // Explore buttons
+            const exploreButtons = document.querySelectorAll('button:contains("Explorar")');
+            exploreButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const section = this.closest('.service-card').id;
+                    document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !expanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
